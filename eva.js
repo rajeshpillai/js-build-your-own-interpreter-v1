@@ -5,8 +5,13 @@ class Eva {
     if (isNumber(exp)) {
       return exp;
     }
+
     if (isString(exp)) {
       return exp.slice(1,-1);
+    }
+
+    if(exp[0] === '+') {
+      return exp[1] + exp[2];
     }
     throw 'Unimplemented';
   }
