@@ -48,7 +48,13 @@ class Eva {
 
     // Implement div, mult etc.
 
-    // Variable declaration <- talk about environment (storage of all vars and funcs in scope)
+
+    // Block: sequence of expressions
+    if (exp[0] === 'begin') {
+      return this._evalBlock(exp, env);
+    }
+
+    // Variable declaration: var foo 100 <- talk about environment (storage of all vars and funcs in scope)
     if(exp[0] === 'var') {
       const [_, name, value] = exp;
       return env.define(name, this.eval(value));
@@ -62,6 +68,14 @@ class Eva {
     throw `Unimplemented: ${JSON.stringify(exp)}`;
   }
 
+  _evalBlock(block, env) {
+    let result;
+    const [_tag, ...expressions] = block;
+    expressions.forEach(exp => {
+      result = this.eval(exp, env);
+    });
+    return result;
+  }
 }
 
 function isNumber(exp) {
@@ -105,6 +119,15 @@ assert.strictEqual(eva.eval(['var', 'isUser', 'true']), true);
 
 // More test for variable evaluation
 assert.strictEqual(eva.eval(['var', 'z', ['*', 2,2]]), 4);
+
+// Blocks: 
+assert.strictEqual(eva.eval(
+  ['begin',
+  ['var', 'x', 10],
+  ['var', 'y', 20],
+  ['+', ['*', 'x' ,  'y'], 30],
+  ]),
+230);
 
 console.log('All assertions passed.');
 

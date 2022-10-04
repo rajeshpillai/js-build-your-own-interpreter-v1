@@ -9,3 +9,6 @@
     - [X] Install some variables to globals like null, true, false etc.
     - [X] Handle variable types like true, false as boolean instead of string
     - [ ] Assign a new value to a variable -> (set x 20)
+- [ ] Blocks
+  - [X] Block declaration
+  - [ ] Block scope
