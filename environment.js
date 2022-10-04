@@ -2,8 +2,9 @@
 class Environment {
   
   // Creates an env with the given record
-  constructor(record = {}) {
+  constructor(record = {}, parent = null) {
     this.record = record;
+    this.parent = parent;
   }
 
   /*

@@ -11,4 +11,4 @@
     - [ ] Assign a new value to a variable -> (set x 20)
 - [ ] Blocks
   - [X] Block declaration
-  - [ ] Block scope
+  - [X] Nested env/scope

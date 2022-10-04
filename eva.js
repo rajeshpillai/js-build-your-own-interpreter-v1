@@ -37,21 +37,24 @@ class Eva {
     if (isString(exp)) {
       return exp.slice(1,-1);
     }
+    
+    // Math operations:
 
     if(exp[0] === '+') {
-      return this.eval(exp[1]) + this.eval(exp[2]);
+      return this.eval(exp[1], env) + this.eval(exp[2], env);
     }
 
     if(exp[0] === '*') {
-      return this.eval(exp[1]) * this.eval(exp[2]);
+      return this.eval(exp[1], env) * this.eval(exp[2],env);
     }
 
-    // Implement div, mult etc.
+    // TODO: Implement div, mult etc.
 
 
     // Block: sequence of expressions
     if (exp[0] === 'begin') {
-      return this._evalBlock(exp, env);
+      const blockEnv = new Environment({}, env);
+      return this._evalBlock(exp, blockEnv);
     }
 
     // Variable declaration: var foo 100 <- talk about environment (storage of all vars and funcs in scope)
@@ -128,6 +131,18 @@ assert.strictEqual(eva.eval(
   ['+', ['*', 'x' ,  'y'], 30],
   ]),
 230);
+
+// Evaluate block in it's own environment
+assert.strictEqual(eva.eval(
+  ['begin',
+    ['var', 'x', 10],
+    ['begin',
+      ['var', 'x', 20],
+      'x'
+    ],
+    'x'
+  ]), 
+10);
 
 console.log('All assertions passed.');
 
