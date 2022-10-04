@@ -51,7 +51,7 @@ class Eva {
     // Variable declaration <- talk about environment (storage of all vars and funcs in scope)
     if(exp[0] === 'var') {
       const [_, name, value] = exp;
-      return env.define(name, value);
+      return env.define(name, this.eval(value));
     }
 
     // Variable access:
@@ -98,6 +98,9 @@ assert.strictEqual(eva.eval('x'), 10);
 assert.strictEqual(eva.eval(['var', 'y', 100]), 100);
 assert.strictEqual(eva.eval('y'), 100);
 assert.strictEqual(eva.eval('VERSION'), '0.1');
+
+// var isUser = true;
+assert.strictEqual(eva.eval(['var', 'isUser', 'true']), true);
 
 console.log('All assertions passed.');
 
