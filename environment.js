@@ -15,6 +15,11 @@ class Environment {
     return value;
   }
 
+  // Updtes an existing variable
+  assign(name, value) {
+    this.resolve(name).record[name] = value;
+  }
+
   // Returns the value of a defined variable or throws undefined
   lookup(name) {
     return this.resolve(name).record[name];
