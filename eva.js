@@ -60,7 +60,7 @@ class Eva {
     // Variable declaration: var foo 100 <- talk about environment (storage of all vars and funcs in scope)
     if(exp[0] === 'var') {
       const [_, name, value] = exp;
-      return env.define(name, this.eval(value));
+      return env.define(name, this.eval(value, env));
     }
 
     // Variable access:
@@ -143,6 +143,18 @@ assert.strictEqual(eva.eval(
     'x'
   ]), 
 10);
+
+// Access variable from outer env
+assert.strictEqual(eva.eval(
+  ['begin',
+    ['var', 'value', 10],
+    ['var', 'result', ['begin',
+      ['var', 'x', ['+', 'value', 10]], // 'value' is in outer scope
+      'x'
+    ]],
+    'result'  // return 'result'
+  ]), 
+20);
 
 console.log('All assertions passed.');
 

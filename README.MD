@@ -12,3 +12,4 @@
 - [ ] Blocks
   - [X] Block declaration
   - [X] Nested env/scope
+  - [X] Access outer variable by inner scope
