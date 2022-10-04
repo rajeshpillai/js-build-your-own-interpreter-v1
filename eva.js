@@ -77,7 +77,12 @@ function isVariableName(exp) {
 }
 
 // Tests: 
-const eva = new Eva();
+const eva = new Eva(new Environment({
+  null: null,
+  true: true,
+  false: false,
+  VERSION: '0.1',
+}));
 
 // Math:
 assert.strictEqual(eva.eval(1), 1);
@@ -92,6 +97,7 @@ assert.strictEqual(eva.eval('x'), 10);
 
 assert.strictEqual(eva.eval(['var', 'y', 100]), 100);
 assert.strictEqual(eva.eval('y'), 100);
+assert.strictEqual(eva.eval('VERSION'), '0.1');
 
 console.log('All assertions passed.');
 
