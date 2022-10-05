@@ -26,3 +26,4 @@
   - [X] Access outer variable by inner scope
 - [X] Refactor Tests
 - [X] Branch expression
+- [ ] While Loop

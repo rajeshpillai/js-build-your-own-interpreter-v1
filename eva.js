@@ -101,10 +101,20 @@ class Eva {
     // if-expressions:
     if (exp[0] === 'if') {
       const [_tag, condition, consequent, alternate] = exp;
-      if (this.eval(condition)) {
+      if (this.eval(condition, env)) {
         return this.eval(consequent, env);
       }
       return this.eval(alternate, env);
+    }
+
+    // while-expressions:
+    if (exp[0] === 'while') {
+      const [_tag, condition, body] = exp;
+      let result;
+      while(this.eval(condition, env)) {
+        result = this.eval(body, env);
+      }
+      return result;
     }
 
     throw `Unimplemented: ${JSON.stringify(exp)}`;
