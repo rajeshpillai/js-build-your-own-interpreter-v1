@@ -1,4 +1,5 @@
 const assert = require('assert');
+const { builtinModules } = require('module');
 const { env } = require('process');
 const Environment = require('./environment');
 
@@ -100,81 +101,11 @@ function isVariableName(exp) {
   return typeof exp === 'string' && /^[a-zA-Z][a-zA-Z0-9_]*$/.test(exp);
 }
 
-// Tests: 
-const eva = new Eva(new Environment({
-  null: null,
-  true: true,
-  false: false,
-  VERSION: '0.1',
-}));
 
-// Math:
-assert.strictEqual(eva.eval(1), 1);
-assert.strictEqual(eva.eval('"Hello"'), "Hello");
-assert.strictEqual(eva.eval(['+',1,5]), 6);
-assert.strictEqual(eva.eval(['+', ['+', 3,2],5]),10);
-assert.strictEqual(eva.eval(['+', ['*', 3,2],5]),11);
-
-// Variables:
-assert.strictEqual(eva.eval(['var', 'x', 10]), 10);
-assert.strictEqual(eva.eval('x'), 10);
-
-assert.strictEqual(eva.eval(['var', 'y', 100]), 100);
-assert.strictEqual(eva.eval('y'), 100);
-assert.strictEqual(eva.eval('VERSION'), '0.1');
-
-// var isUser = true;
-assert.strictEqual(eva.eval(['var', 'isUser', 'true']), true);
+module.exports = Eva;
 
 
-// More test for variable evaluation
-assert.strictEqual(eva.eval(['var', 'z', ['*', 2,2]]), 4);
 
-// Blocks: 
-assert.strictEqual(eva.eval(
-  ['begin',
-  ['var', 'x', 10],
-  ['var', 'y', 20],
-  ['+', ['*', 'x' ,  'y'], 30],
-  ]),
-230);
-
-// Evaluate block in it's own environment
-assert.strictEqual(eva.eval(
-  ['begin',
-    ['var', 'x', 10],
-    ['begin',
-      ['var', 'x', 20],
-      'x'
-    ],
-    'x'
-  ]), 
-10);
-
-// Access variable from outer env
-assert.strictEqual(eva.eval(
-  ['begin',
-    ['var', 'value', 10],
-    ['var', 'result', ['begin',
-      ['var', 'x', ['+', 'value', 10]], // 'value' is in outer scope
-      'x'
-    ]],
-    'result'  // return 'result'
-  ]), 
-20);
-
-// Variable assignment
-assert.strictEqual(eva.eval(
-  ['begin',
-    ['var', 'data', 10],
-    ['begin',
-      ['set', 'data', 100],
-    ],
-    'data',
-  ]),
-100);
-
-console.log('All assertions passed.');
 
 
 

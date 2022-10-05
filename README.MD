@@ -1,3 +1,14 @@
+# Run test
+  ```node ./__tests__/run.js```
+
+  OR
+
+  ``` npm run tests```
+
+  If you have nodemon installed you can automatically run the test on any file change
+
+  ``` npm run watch-tests```
+
 # Features
 
 - [X] Simple expression parser
@@ -13,3 +24,4 @@
   - [X] Block declaration
   - [X] Nested env/scope
   - [X] Access outer variable by inner scope
+- [X] Refactor Tests

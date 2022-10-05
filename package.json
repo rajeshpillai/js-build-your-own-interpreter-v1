@@ -1,0 +1,21 @@
+{
+  "name": "eva",
+  "version": "1.0.0",
+  "description": "```node ./__tests__/run.js```",
+  "main": "eva.js",
+  "scripts": {
+    "tests": "node ./__tests__/run.js",
+    "watch-tests": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajeshpillai/js-build-your-own-interpreter-v1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajeshpillai/js-build-your-own-interpreter-v1/issues"
+  },
+  "homepage": "https://github.com/rajeshpillai/js-build-your-own-interpreter-v1#readme"
+}
