@@ -49,6 +49,28 @@ class Eva {
       return this.eval(exp[1], env) * this.eval(exp[2],env);
     }
 
+    // Comparision operations:
+    if(exp[0] === '>') {
+      return this.eval(exp[1], env) > this.eval(exp[2], env);
+    }
+
+    if(exp[0] === '>=') {
+      return this.eval(exp[1], env) >= this.eval(exp[2], env);
+    }
+
+    if(exp[0] === '<') {
+      return this.eval(exp[1], env) < this.eval(exp[2], env);
+    }
+
+    if(exp[0] === '<=') {
+      return this.eval(exp[1], env) <= this.eval(exp[2], env);
+    }
+
+    if(exp[0] === '=') {
+      return this.eval(exp[1], env) === this.eval(exp[2], env);
+    }
+
+
     // TODO: Implement div, mult etc.
 
 
@@ -74,6 +96,15 @@ class Eva {
     // Variable access:
     if (isVariableName(exp)) {
       return env.lookup(exp);
+    }
+
+    // if-expressions:
+    if (exp[0] === 'if') {
+      const [_tag, condition, consequent, alternate] = exp;
+      if (this.eval(condition)) {
+        return this.eval(consequent, env);
+      }
+      return this.eval(alternate, env);
     }
 
     throw `Unimplemented: ${JSON.stringify(exp)}`;

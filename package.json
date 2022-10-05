@@ -5,7 +5,7 @@
   "main": "eva.js",
   "scripts": {
     "tests": "node ./__tests__/run.js",
-    "watch-tests": "nodemon ."
+    "watch-tests": "nodemon --watch . --watch __tests__ ./__tests__/run.js"
   },
   "repository": {
     "type": "git",
